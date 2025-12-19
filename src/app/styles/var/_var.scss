@@ -1,0 +1,27 @@
+:root {
+  --font-nunito: "Nunito", sans-serif;
+
+  // colors
+  --color-white: #fff;
+  --color-black: #000;
+
+  --content-bg-dark: #161b22;
+  --content-bg-light: #f8f8f8;
+
+  --card-bg-dark: #21262d;
+  --card-bg-light: rgb(240, 241, 242);
+
+  --color-border-dark: #30363d;
+  --color-border-light: #e1e4e8;
+
+  // space
+  --space-xs: 8px;
+  --space-s: 12px;
+  --space-m: 16px;
+  --space-l: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+
+  // z-index
+  --z-index-header: 1000;
+}

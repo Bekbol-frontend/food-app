@@ -1,0 +1,8 @@
+@use "./var/var";
+@use "./reset/reset";
+@use "./theme/dark";
+@use "./theme/light";
+
+#root {
+  min-height: 100vh;
+}
