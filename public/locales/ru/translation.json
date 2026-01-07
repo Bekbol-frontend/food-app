@@ -17,5 +17,11 @@
   "Please enter a category name!": "Пожалуйста, введите название категории!",
   "Category created successfully!": "Категория успешно создана!",
   "Error get category": "Ошибка получения категории",
-  "Category updated successfully!": "Категория успешно обновлена!"
+  "Category updated successfully!": "Категория успешно обновлена!",
+  "Category deleted successfully!": "Категория успешно удалена!",
+
+  "Delete category task?": "Удалить задачу категории?",
+  "Are you sure to delete this category task?": "Вы уверены, что удалите эту задачу из данной категории?",
+  "Yes": "Да",
+  "No": "Нет"
 }

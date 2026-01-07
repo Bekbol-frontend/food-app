@@ -17,5 +17,11 @@
   "Please enter a category name!": "Iltimas, taypa atınıń kirgiziń!",
   "Category created successfully!": "Gruppa tabıslı jaratıldı!",
   "Error get category": "Kategoriya alıwda qáte júz berdi",
-  "Category updated successfully!": "Kategoriya tabıslı jańalandı!"
+  "Category updated successfully!": "Kategoriya tabıslı jańalandı!",
+  "Category deleted successfully!": "Kategoriya tabıslı óshirildi!",
+
+  "Delete category task?": "Kategoriya wazıypası óshirilsin be?",
+  "Are you sure to delete this category task?": "Bul kategoriya wazıypasın óshirmekshimisiz?",
+  "Yes": "Awa",
+  "No": "Joq"
 }

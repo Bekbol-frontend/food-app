@@ -17,5 +17,11 @@
   "Please enter a category name!": "Iltimos, toifa nomini kiriting!",
   "Category created successfully!": "Turkum muvaffaqiyatli yaratildi!",
   "Error get category": "Kategoriya olishda xatolik yuz berdi",
-  "Category updated successfully!": "Turkum muvaffaqiyatli yangilandi!"
+  "Category updated successfully!": "Turkum muvaffaqiyatli yangilandi!",
+  "Category deleted successfully!": "Turkum muvaffaqiyatli oʻchirildi!",
+
+  "Delete category task?": "Kategoriya vazifasi oʻchirilsinmi?",
+  "Are you sure to delete this category task?": "Ushbu turkum vazifasini oʻchirib tashlamoqchimisiz?",
+  "Yes": "Ha",
+  "No": "Yo'q"
 }

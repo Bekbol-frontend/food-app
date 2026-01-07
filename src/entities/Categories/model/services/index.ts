@@ -23,3 +23,7 @@ export const updateCategory = async ({
 }) => {
   return await API.put<IData<ICategory>>(`/api/v1/categories/${id}`, data);
 };
+
+export const deleteMutation = async (id: number) => {
+  return await API.delete<IData<ICategory>>(`/api/v1/categories/${id}`);
+};

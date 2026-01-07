@@ -1,10 +1,11 @@
 import { formatDateTable } from "@/shared/lib/formatDateTable";
 import type { ICategory } from "../../model/types";
-import { Button, Card, Space, Table } from "antd";
+import { Button, Card, Popconfirm, Space, Table, message } from "antd";
 import type { TableProps } from "antd";
 import { useTranslation } from "react-i18next";
-import { useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { useDeleteCategory } from "../../model/hooks/useDeleteCategory";
 
 interface IProps {
   data?: ICategory[];
@@ -14,7 +15,31 @@ interface IProps {
 
 function CategoryTable(props: IProps) {
   const { data, loading, onEdit } = props;
+
+  const [id, setId] = useState<null | number>(null);
+  const [messageApi, contextHolder] = message.useMessage();
+
   const { t } = useTranslation();
+
+  const deleteMutate = useDeleteCategory(messageApi);
+
+  const { mutate, isPending, isSuccess } = deleteMutate;
+
+  useEffect(() => {
+    if (isSuccess) setId(null);
+
+    return () => {
+      setId(null);
+    };
+  }, [isSuccess]);
+
+  const confirm = useCallback(
+    (id: number) => {
+      mutate(id);
+      setId(id);
+    },
+    [mutate]
+  );
 
   const columns: TableProps<ICategory>["columns"] = useMemo(
     () => [
@@ -45,7 +70,21 @@ function CategoryTable(props: IProps) {
         key: "action",
         render: (_, record) => (
           <Space size="small">
-            <Button type="primary" danger icon={<DeleteOutlined />} />
+            <Popconfirm
+              title={t("Delete category task?")}
+              description={t("Are you sure to delete this category task?")}
+              onConfirm={() => confirm(record.id)}
+              okText={t("Yes")}
+              cancelText={t("No")}
+            >
+              <Button
+                type="primary"
+                danger
+                icon={<DeleteOutlined />}
+                loading={id === record.id && isPending}
+              />
+            </Popconfirm>
+
             <Button
               type="primary"
               icon={<EditOutlined />}
@@ -55,19 +94,22 @@ function CategoryTable(props: IProps) {
         ),
       },
     ],
-    [t]
+    [t, confirm, id, isPending, onEdit]
   );
 
   return (
-    <Card>
-      <Table<ICategory>
-        loading={loading}
-        rowKey="id"
-        columns={columns}
-        dataSource={data}
-        pagination={false}
-      />
-    </Card>
+    <>
+      {contextHolder}
+      <Card>
+        <Table<ICategory>
+          loading={loading}
+          rowKey="id"
+          columns={columns}
+          dataSource={data}
+          pagination={false}
+        />
+      </Card>
+    </>
   );
 }
 
