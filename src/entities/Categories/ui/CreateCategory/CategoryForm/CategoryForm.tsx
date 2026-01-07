@@ -26,7 +26,7 @@ function CategoryForm({ closeModal, id }: IProps) {
   const createMutation = useCreateCategory({ form, closeModal, messageApi });
   const updateMutation = useUpdateCategory({ form, closeModal, messageApi });
   const {
-    data,
+    data: categoryData,
     isLoading,
     isError: isGetError,
     error: getError,
@@ -69,10 +69,14 @@ function CategoryForm({ closeModal, id }: IProps) {
   };
 
   useEffect(() => {
-    if (data?.data.data) {
-      form.setFieldsValue(data.data.data);
+    if (categoryData?.data.data) {
+      form.setFieldsValue(categoryData.data.data);
     }
-  }, [data, form]);
+
+    return () => {
+      form.resetFields();
+    };
+  }, [categoryData, form]);
 
   if (isLoading) {
     return <ContentLoading />;
