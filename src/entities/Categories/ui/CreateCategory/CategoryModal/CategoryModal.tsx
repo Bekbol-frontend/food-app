@@ -4,14 +4,15 @@ import CategoryForm from "../CategoryForm/CategoryForm";
 interface IProps {
   modal: boolean;
   handleCancel: () => void;
+  id: null | number;
 }
 
 function CategoryModal(props: IProps) {
-  const { modal, handleCancel } = props;
+  const { modal, handleCancel, id } = props;
 
   return (
     <Modal open={modal} onCancel={handleCancel} footer={null}>
-      <CategoryForm closeModal={handleCancel} />
+      <CategoryForm closeModal={handleCancel} id={id} />
     </Modal>
   );
 }

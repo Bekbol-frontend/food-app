@@ -6,12 +6,16 @@
   "Orders": "Buyurtmalar",
   "Clients": "Mijozlar",
   "Create": "Yaratish",
+  "Update": "Yangilash",
   "Error create": "Yaratish xatosi",
+  "Error update": "Xato yangilash",
 
   "ID": "ID",
   "Name": "Nomi",
   "Created At": "Yaratilgan",
   "Updated At": "Yangilangan",
   "Please enter a category name!": "Iltimos, toifa nomini kiriting!",
-  "Category created successfully!": "Turkum muvaffaqiyatli yaratildi!"
+  "Category created successfully!": "Turkum muvaffaqiyatli yaratildi!",
+  "Error get category": "Kategoriya olishda xatolik yuz berdi",
+  "Category updated successfully!": "Turkum muvaffaqiyatli yangilandi!"
 }

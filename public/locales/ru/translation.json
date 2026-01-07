@@ -6,12 +6,16 @@
   "Orders": "Заказы",
   "Clients": "Клиенты",
   "Create": "Создать",
+  "Update": "Обновить",
   "Error create": "Ошибка создания",
+  "Error update": "Ошибка обновления",
 
   "ID": "ID",
   "Name": "Название",
   "Created At": "Создано в",
   "Updated At": "Обновлено в",
   "Please enter a category name!": "Пожалуйста, введите название категории!",
-  "Category created successfully!": "Категория успешно создана!"
+  "Category created successfully!": "Категория успешно создана!",
+  "Error get category": "Ошибка получения категории",
+  "Category updated successfully!": "Категория успешно обновлена!"
 }

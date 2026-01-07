@@ -9,3 +9,17 @@ export const getCategories = async () => {
 export const crateCategory = async (data: ICategoryForm) => {
   return await API.post<IData<ICategory>>("/api/v1/categories", data);
 };
+
+export const getCategoryById = async (id: number) => {
+  return await API.get<IData<ICategory>>(`/api/v1/categories/${id}`);
+};
+
+export const updateCategory = async ({
+  data,
+  id,
+}: {
+  data: ICategoryForm;
+  id: number;
+}) => {
+  return await API.put<IData<ICategory>>(`/api/v1/categories/${id}`, data);
+};

@@ -9,10 +9,11 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 interface IProps {
   data?: ICategory[];
   loading: boolean;
+  onEdit: (id: number) => void;
 }
 
 function CategoryTable(props: IProps) {
-  const { data, loading } = props;
+  const { data, loading, onEdit } = props;
   const { t } = useTranslation();
 
   const columns: TableProps<ICategory>["columns"] = useMemo(
@@ -42,10 +43,14 @@ function CategoryTable(props: IProps) {
       {
         title: t("Action"),
         key: "action",
-        render: () => (
+        render: (_, record) => (
           <Space size="small">
             <Button type="primary" danger icon={<DeleteOutlined />} />
-            <Button type="primary" icon={<EditOutlined />} />
+            <Button
+              type="primary"
+              icon={<EditOutlined />}
+              onClick={() => onEdit(record.id)}
+            />
           </Space>
         ),
       },

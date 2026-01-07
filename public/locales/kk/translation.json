@@ -6,12 +6,16 @@
   "Orders": "Buyırtpalar",
   "Clients": "Qarıydarlar",
   "Create": "Jaratıw",
+  "Update": "Jańalaw",
   "Error create": "Jaratıw qátesi",
+  "Error update": "Qáte jańalaw",
 
   "ID": "ID",
   "Name": "Atı",
   "Created At": "Jaratılǵan",
   "Updated At": "Jańalanǵan",
   "Please enter a category name!": "Iltimas, taypa atınıń kirgiziń!",
-  "Category created successfully!": "Gruppa tabıslı jaratıldı!"
+  "Category created successfully!": "Gruppa tabıslı jaratıldı!",
+  "Error get category": "Kategoriya alıwda qáte júz berdi",
+  "Category updated successfully!": "Kategoriya tabıslı jańalandı!"
 }

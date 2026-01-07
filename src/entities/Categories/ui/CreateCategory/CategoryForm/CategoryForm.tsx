@@ -1,48 +1,50 @@
-import { crateCategory } from "@/entities/Categories/model/services";
 import type { ICategoryForm } from "@/entities/Categories/model/types";
-import { queryKeys } from "@/shared/lib/queryKeys";
-import { tabItems } from "@/shared/lib/tabItems";
 import type { TypeLangs } from "@/shared/types";
-import { useMutation } from "@tanstack/react-query";
+import { ContentError } from "@/shared/ui/ContentError";
+import { ContentLoading } from "@/shared/ui/ContentLoading";
 import type { FormProps } from "antd";
-import { Button, Form, Input, Tabs, message, notification } from "antd";
+import { Button, Form, message, notification } from "antd";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import CategoryFormTab from "./CategoryFormTab/CategoryFormTab";
+import { useCreateCategory } from "@/entities/Categories/model/hooks/useCreateCategory";
+import { useUpdateCategory } from "@/entities/Categories/model/hooks/useUpdateCategory";
+import { useGetCategoryById } from "@/entities/Categories/model/hooks/useGetCategoryById";
 
 interface IProps {
   closeModal: () => void;
+  id: null | number;
 }
 
-function CategoryForm({ closeModal }: IProps) {
+function CategoryForm({ closeModal, id }: IProps) {
   const { t } = useTranslation();
   const [messageApi, contextHolder] = message.useMessage();
   const [api, contextHolderNotification] = notification.useNotification();
 
   const [form] = Form.useForm();
 
-  const createMutation = useMutation({
-    mutationKey: [queryKeys.categories],
-    mutationFn: crateCategory,
-    onSuccess: () => {
-      form.resetFields();
-      closeModal();
-      messageApi.open({
-        type: "success",
-        content: t("Category created successfully!"),
-        duration: 2.5,
-      });
-    },
-    onError: (error) => {
-      messageApi.open({
-        type: "error",
-        content: `${t("Error create")} ${error.message}`,
-        duration: 2.5,
-      });
-    },
-  });
+  const createMutation = useCreateCategory({ form, closeModal, messageApi });
+  const updateMutation = useUpdateCategory({ form, closeModal, messageApi });
+  const {
+    data,
+    isLoading,
+    isError: isGetError,
+    error: getError,
+  } = useGetCategoryById(id);
 
   const { mutate, isPending, isError } = createMutation;
+  const {
+    mutate: mutateUpdate,
+    isPending: isPendingUpdate,
+    isError: isErrorUpdate,
+  } = updateMutation;
 
   const onFinish: FormProps<ICategoryForm>["onFinish"] = (values) => {
+    if (id) {
+      mutateUpdate({ data: values, id });
+      return;
+    }
+
     mutate(values);
   };
 
@@ -66,50 +68,41 @@ function CategoryForm({ closeModal }: IProps) {
     });
   };
 
+  useEffect(() => {
+    if (data?.data.data) {
+      form.setFieldsValue(data.data.data);
+    }
+  }, [data, form]);
+
+  if (isLoading) {
+    return <ContentLoading />;
+  }
+
+  if (isGetError && getError) {
+    return <ContentError title="Error get category" desc={getError.message} />;
+  }
+
   return (
     <>
       {contextHolder}
       {contextHolderNotification}
       <Form
         form={form}
-        name="create-category"
+        name={id ? "update-category-form" : "create-category-form"}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
         layout="vertical"
       >
-        <Tabs
-          type="card"
-          destroyOnHidden
-          items={tabItems.map((el) => ({
-            key: el.key,
-            label: el.label,
-            forceRender: true,
-            style: { borderColor: "red" },
-            children: (
-              <Form.Item<ICategoryForm>
-                label={t("Name")}
-                name={["name", el.key]}
-                rules={[
-                  {
-                    required: true,
-                    message: t("Please enter a category name!"),
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            ),
-          }))}
-        />
+        <CategoryFormTab />
 
         <Button
           type="primary"
           htmlType="submit"
-          loading={isPending}
-          danger={isError}
+          loading={isPending || isPendingUpdate}
+          danger={isError || isErrorUpdate}
         >
-          {isError ? t("Error create") : t("Create")}
+          {isError ? t("Error create") : id ? t("Update") : t("Create")}
         </Button>
       </Form>
     </>

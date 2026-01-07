@@ -1,21 +1,15 @@
 import { ContentBlock } from "@/shared/ui/ContentBlock";
-import { useQuery } from "@tanstack/react-query";
-import { getCategories } from "../model/services";
 import CategoryTable from "./CategoryTable/CategoryTable";
-import { useTranslation } from "react-i18next";
-import { queryKeys } from "@/shared/lib/queryKeys";
 import { HeaderSection } from "@/shared/ui/HeaderSection";
 import { useCallback, useState } from "react";
 import CategoryModal from "./CreateCategory/CategoryModal/CategoryModal";
+import { useGetCategories } from "../model/hooks/useGetCategories";
 
 function Categories() {
   const [modal, setModal] = useState(false);
-  const { i18n } = useTranslation();
+  const [id, setId] = useState<number | null>(null);
 
-  const { data, isLoading } = useQuery({
-    queryKey: [queryKeys.categories, i18n.language],
-    queryFn: getCategories,
-  });
+  const { data, isLoading } = useGetCategories();
 
   const onShowModal = useCallback(() => {
     setModal(true);
@@ -23,16 +17,27 @@ function Categories() {
 
   const onHideModal = useCallback(() => {
     setModal(false);
+    setId(null);
+  }, []);
+
+  const onEdit = useCallback((id: number) => {
+    setId(id);
+    setModal(true);
   }, []);
 
   return (
     <>
       <HeaderSection title="Categories" onShowModal={onShowModal} />
+
       <ContentBlock>
-        <CategoryTable data={data?.data.data} loading={isLoading} />
+        <CategoryTable
+          data={data?.data.data}
+          loading={isLoading}
+          onEdit={onEdit}
+        />
       </ContentBlock>
 
-      <CategoryModal modal={modal} handleCancel={onHideModal} />
+      <CategoryModal modal={modal} handleCancel={onHideModal} id={id} />
     </>
   );
 }
