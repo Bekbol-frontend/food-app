@@ -1,0 +1,7 @@
+.contentBlock {
+  padding: var(--space-l) 0;
+
+  @media screen and (max-width: 768px) {
+    padding: var(--space-m) 0;
+  }
+}

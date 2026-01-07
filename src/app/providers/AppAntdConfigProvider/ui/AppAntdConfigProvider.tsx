@@ -3,10 +3,8 @@ import { ConfigProvider, theme } from "antd";
 import { useAppContext } from "@/shared/lib/useAppContext";
 import type { THEME } from "../../AppContextProvider";
 
-function getColor(appTheme: THEME) {
-  return appTheme === "dark"
-    ? "var(--content-bg-dark)"
-    : "var(--content-bg-light)";
+function getColor(appTheme: THEME, content: string) {
+  return appTheme === "dark" ? `var(${content}-dark)` : `var(${content}-light)`;
 }
 
 interface IProps {
@@ -30,12 +28,12 @@ function AppAntdConfigProvider({ children }: IProps) {
         components: {
           Layout: {
             headerHeight: 90,
-            headerBg: getColor(appTheme),
-            siderBg: getColor(appTheme),
-            bodyBg: getColor(appTheme),
+            headerBg: getColor(appTheme, "--content-bg"),
+            siderBg: getColor(appTheme, "--content-bg"),
+            bodyBg: getColor(appTheme, "--content-bg"),
           },
           Menu: {
-            itemBg: getColor(appTheme),
+            itemBg: getColor(appTheme, "--content-bg"),
           },
           Button: {
             controlHeight: 37,

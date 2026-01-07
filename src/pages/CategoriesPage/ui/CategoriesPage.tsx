@@ -1,8 +1,11 @@
+import { Categories } from "@/entities/Categories";
 
 function CategoriesPage() {
   return (
-    <div>CategoriesPage</div>
-  )
+    <>
+      <Categories />
+    </>
+  );
 }
 
-export default CategoriesPage
+export default CategoriesPage;

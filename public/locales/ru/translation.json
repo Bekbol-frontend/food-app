@@ -4,5 +4,14 @@
   "Categories": "Категории",
   "Products": "Продукты",
   "Orders": "Заказы",
-  "Clients": "Клиенты"
+  "Clients": "Клиенты",
+  "Create": "Создать",
+  "Error create": "Ошибка создания",
+
+  "ID": "ID",
+  "Name": "Название",
+  "Created At": "Создано в",
+  "Updated At": "Обновлено в",
+  "Please enter a category name!": "Пожалуйста, введите название категории!",
+  "Category created successfully!": "Категория успешно создана!"
 }

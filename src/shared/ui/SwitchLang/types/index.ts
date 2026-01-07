@@ -9,3 +9,4 @@ export const LangText = {
   UZ: "Uzbek",
   RU: "Русский",
 } as const;
+

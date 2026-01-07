@@ -4,5 +4,14 @@
   "Categories": "Kategoriyalar",
   "Products": "Mahsulotlar",
   "Orders": "Buyurtmalar",
-  "Clients": "Mijozlar"
+  "Clients": "Mijozlar",
+  "Create": "Yaratish",
+  "Error create": "Yaratish xatosi",
+
+  "ID": "ID",
+  "Name": "Nomi",
+  "Created At": "Yaratilgan",
+  "Updated At": "Yangilangan",
+  "Please enter a category name!": "Iltimos, toifa nomini kiriting!",
+  "Category created successfully!": "Turkum muvaffaqiyatli yaratildi!"
 }

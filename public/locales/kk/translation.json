@@ -4,5 +4,14 @@
   "Categories": "Kategoriyalar",
   "Products": "Ónimler",
   "Orders": "Buyırtpalar",
-  "Clients": "Qarıydarlar"
+  "Clients": "Qarıydarlar",
+  "Create": "Jaratıw",
+  "Error create": "Jaratıw qátesi",
+
+  "ID": "ID",
+  "Name": "Atı",
+  "Created At": "Jaratılǵan",
+  "Updated At": "Jańalanǵan",
+  "Please enter a category name!": "Iltimas, taypa atınıń kirgiziń!",
+  "Category created successfully!": "Gruppa tabıslı jaratıldı!"
 }
