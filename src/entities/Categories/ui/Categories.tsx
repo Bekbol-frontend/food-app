@@ -17,8 +17,11 @@ function Categories() {
 
   const onHideModal = useCallback(() => {
     setModal(false);
-    setId(null);
-  }, []);
+
+    if (id) {
+      setId(null);
+    }
+  }, [id]);
 
   const onEdit = useCallback((id: number) => {
     setId(id);
