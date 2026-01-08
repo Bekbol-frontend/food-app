@@ -5,4 +5,5 @@ export const AppRoutePages = {
   products: "/products",
   orders: "/orders",
   clients: "/clients",
+  login: "/login",
 } as const;

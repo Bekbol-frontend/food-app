@@ -38,6 +38,9 @@ function AppAntdConfigProvider({ children }: IProps) {
           Button: {
             controlHeight: 37,
           },
+          Input: {
+            controlHeight: 37,
+          },
         },
       }}
     >
