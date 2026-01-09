@@ -1,10 +1,11 @@
 import { AppRoutePages } from "@/shared/config/routeConfig";
+import { useGetAuth } from "@/shared/hooks/useGetAuth";
 import { Navigate, Outlet } from "react-router-dom";
 
 function ProtectedRoute() {
-  const check = false;
+  const { token } = useGetAuth();
 
-  return check ? <Outlet /> : <Navigate to={AppRoutePages.login} replace />;
+  return token ? <Outlet /> : <Navigate to={AppRoutePages.login} replace />;
 }
 
 export default ProtectedRoute;

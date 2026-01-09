@@ -23,5 +23,12 @@
   "Delete category task?": "Удалить задачу категории?",
   "Are you sure to delete this category task?": "Вы уверены, что удалите эту задачу из данной категории?",
   "Yes": "Да",
-  "No": "Нет"
+  "No": "Нет",
+
+  "Login error": "Ошибка входа",
+  "You are logged in!": "Вы вошли в систему!",
+  "Login": "Логин",
+  "Please input your login!": "Пожалуйста, введите свой логин!",
+  "Password": "Пароль",
+  "Please input your password!": "Пожалуйста, введите свой пароль!"
 }

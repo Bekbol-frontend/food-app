@@ -7,15 +7,32 @@ import { useAppDispatch } from "@/shared/hooks/useAppDispatch";
 import { fetchLogin } from "../model/services/fetchLogin";
 import { useSelector } from "react-redux";
 import type { IStateSchema } from "@/app/providers/AppStoreProvider";
+import { useMessageContext } from "@/shared/hooks/useMessageContext";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 function AuthLogin() {
   const dispatch = useAppDispatch();
 
-  const { isLoading } = useSelector((state: IStateSchema) => state.login);
+  const { isLoading, error } = useSelector(
+    (state: IStateSchema) => state.login
+  );
+  const { messageApi } = useMessageContext();
+  const { t } = useTranslation();
 
-  const onFinish: FormProps<IAuthLoginForm>["onFinish"] = (values) => {
-    dispatch(fetchLogin(values));
+  const onFinish: FormProps<IAuthLoginForm>["onFinish"] = async (values) => {
+    const res = await dispatch(fetchLogin(values));
+
+    if (res.meta.requestStatus === "fulfilled") {
+      messageApi.success(t("You are logged in!"));
+    }
   };
+
+  useEffect(() => {
+    if (error) {
+      messageApi.error(`${t("Login error")} ${error}`);
+    }
+  }, [error]);
 
   return (
     <Card className={styles.authWrapperCard}>
@@ -26,23 +43,30 @@ function AuthLogin() {
         autoComplete="off"
       >
         <Form.Item<IAuthLoginForm>
-          label="Login"
+          label={t("Login")}
           name="login"
-          rules={[{ required: true, message: "Please input your login!" }]}
+          rules={[{ required: true, message: t("Please input your login!") }]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item<IAuthLoginForm>
-          label="Password"
+          label={t("Password")}
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          rules={[
+            { required: true, message: t("Please input your password!") },
+          ]}
         >
           <Input.Password />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit" loading={isLoading}>
-          Login
+        <Button
+          type="primary"
+          htmlType="submit"
+          loading={isLoading}
+          danger={Boolean(error)}
+        >
+          {t("Login")}
         </Button>
       </Form>
     </Card>

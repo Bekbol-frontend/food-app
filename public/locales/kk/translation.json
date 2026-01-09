@@ -23,5 +23,12 @@
   "Delete category task?": "Kategoriya wazıypası óshirilsin be?",
   "Are you sure to delete this category task?": "Bul kategoriya wazıypasın óshirmekshimisiz?",
   "Yes": "Awa",
-  "No": "Joq"
+  "No": "Joq",
+
+  "Login error": "Kirisiw qátesi",
+  "You are logged in!": "Siz sistemaǵa kirdiniz!",
+  "Login": "Kiriw",
+  "Please input your login!": "Loginizdi kirgiziń!",
+  "Password": "Parol",
+  "Please input your password!": "Parolinizdi kirgiziń!"
 }

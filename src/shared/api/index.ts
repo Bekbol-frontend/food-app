@@ -1,6 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "./baseUrl";
 import i18n from "../config/i18n";
+import { LOCAL_STORAGE_TOKEN_KEY } from "../constants";
 
 i18n.language;
 
@@ -11,12 +12,21 @@ const API = axios.create({
   },
 });
 
-API.interceptors.request.use((config) => {
-  config.headers = config.headers ?? {};
+API.interceptors.request.use(
+  (config) => {
+    const accessToken = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
 
-  config.headers["Accept-Language"] = i18n.language;
+    config.headers = config.headers ?? {};
+    config.headers["Accept-Language"] = i18n.language;
 
-  return config;
-});
+    if (accessToken) {
+      // config.headers["Authorization"] = `Bearer ${accessToken}`;
+    }
 
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 export default API;

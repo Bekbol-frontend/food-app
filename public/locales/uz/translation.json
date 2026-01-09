@@ -23,5 +23,12 @@
   "Delete category task?": "Kategoriya vazifasi oʻchirilsinmi?",
   "Are you sure to delete this category task?": "Ushbu turkum vazifasini oʻchirib tashlamoqchimisiz?",
   "Yes": "Ha",
-  "No": "Yo'q"
+  "No": "Yo'q",
+
+  "Login error": "Kirish xatosi",
+  "You are logged in!": "Siz tizimga kirdingiz!",
+  "Login": "Tizimga kirish",
+  "Please input your login!": "Iltimos, loginingizni kiriting!",
+  "Password": "Parol",
+  "Please input your password!": "Iltimos, parolingizni kiriting!"
 }
