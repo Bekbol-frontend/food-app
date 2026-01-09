@@ -11,6 +11,7 @@ import "./shared/config/i18n";
 
 // main-css
 import "./app/styles/main.scss";
+import { MessageContextProvider } from "./app/providers/MessageContext";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
@@ -18,7 +19,9 @@ createRoot(document.getElementById("root")!).render(
       <AppContextProvider>
         <AppAntdConfigProvider>
           <AppStoreProvider>
-            <App />
+            <MessageContextProvider>
+              <App />
+            </MessageContextProvider>
           </AppStoreProvider>
         </AppAntdConfigProvider>
       </AppContextProvider>

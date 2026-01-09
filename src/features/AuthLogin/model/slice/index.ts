@@ -20,9 +20,9 @@ const loginSlice = createSlice({
       .addCase(fetchLogin.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(fetchLogin.rejected, (state) => {
+      .addCase(fetchLogin.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = "error";
+        state.error = action.payload;
       });
   },
 });

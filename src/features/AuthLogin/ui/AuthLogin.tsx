@@ -5,9 +5,13 @@ import { Button, Form, Input } from "antd";
 import type { IAuthLoginForm } from "../model/types";
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch";
 import { fetchLogin } from "../model/services/fetchLogin";
+import { useSelector } from "react-redux";
+import type { IStateSchema } from "@/app/providers/AppStoreProvider";
 
 function AuthLogin() {
   const dispatch = useAppDispatch();
+
+  const { isLoading } = useSelector((state: IStateSchema) => state.login);
 
   const onFinish: FormProps<IAuthLoginForm>["onFinish"] = (values) => {
     dispatch(fetchLogin(values));
@@ -37,7 +41,7 @@ function AuthLogin() {
           <Input.Password />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={isLoading}>
           Login
         </Button>
       </Form>
