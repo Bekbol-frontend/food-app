@@ -8,6 +8,7 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDeleteCategory } from "../../model/hooks/useDeleteCategory";
 import { useStyleTable } from "@/shared/ui/useStyleTable";
 import { tableColWidth } from "@/shared/constants/tableColWidth";
+import { useTableScrollY } from "@/shared/lib/useTableScrollY";
 
 interface IProps {
   data?: ICategory[];
@@ -22,6 +23,7 @@ function CategoryTable(props: IProps) {
   const [id, setId] = useState<null | number>(null);
   const [messageApi, contextHolder] = message.useMessage();
   const { t } = useTranslation();
+  const y = useTableScrollY();
 
   const deleteMutate = useDeleteCategory(messageApi);
   const { mutate, isPending, isSuccess } = deleteMutate;
@@ -100,6 +102,10 @@ function CategoryTable(props: IProps) {
     [t, confirm, id, isPending, onEdit]
   );
 
+  if (!data) return null;
+
+  const fakeData = [...data, ...data, ...data];
+
   return (
     <>
       {contextHolder}
@@ -108,10 +114,10 @@ function CategoryTable(props: IProps) {
           loading={loading}
           rowKey="id"
           columns={columns}
-          dataSource={data}
+          dataSource={fakeData}
           pagination={false}
           className={styles.customTable}
-          scroll={{ x: "max-content" }}
+          scroll={{ x: "max-content", y }}
         />
       </Card>
     </>
