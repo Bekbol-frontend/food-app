@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDeleteCategory } from "../../model/hooks/useDeleteCategory";
+import { useStyleTable } from "@/shared/ui/useStyleTable";
 
 interface IProps {
   data?: ICategory[];
@@ -15,14 +16,13 @@ interface IProps {
 
 function CategoryTable(props: IProps) {
   const { data, loading, onEdit } = props;
+  const { styles } = useStyleTable();
 
   const [id, setId] = useState<null | number>(null);
   const [messageApi, contextHolder] = message.useMessage();
-
   const { t } = useTranslation();
 
   const deleteMutate = useDeleteCategory(messageApi);
-
   const { mutate, isPending, isSuccess } = deleteMutate;
 
   useEffect(() => {
@@ -47,6 +47,8 @@ function CategoryTable(props: IProps) {
         title: t("ID"),
         dataIndex: "id",
         key: "id",
+        width: 100,
+        fixed: "start",
       },
       {
         title: t("Name"),
@@ -107,6 +109,8 @@ function CategoryTable(props: IProps) {
           columns={columns}
           dataSource={data}
           pagination={false}
+          className={styles.customTable}
+          scroll={{ x: "max-content" }}
         />
       </Card>
     </>
