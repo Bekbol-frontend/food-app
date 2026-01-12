@@ -1,9 +1,13 @@
 import { useResponsive } from "@/shared/hooks/useResponsive";
+import { SwitchTheme } from "@/shared/ui/SwitchTheme";
 import { FoodMenu } from "@/widgets/FoodMenu";
 import { MenuOutlined } from "@ant-design/icons";
-import { Button, Drawer } from "antd";
+import { Button, Drawer, Flex, Typography } from "antd";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import styles from "./DrawerMenu.module.scss";
+
+const { Paragraph } = Typography;
 
 function DrawerMenu() {
   const [open, setOpen] = useState(false);
@@ -25,7 +29,16 @@ function DrawerMenu() {
     <>
       <Button type="primary" icon={<MenuOutlined />} onClick={showDrawer} />
 
-      <Drawer title={t("Food menu")} onClose={onClose} open={open}>
+      <Drawer
+        title={
+          <Flex align="center" gap={10} justify="space-between">
+            <Paragraph className={styles.desc}>{t("Food menu")}</Paragraph>
+            <SwitchTheme />
+          </Flex>
+        }
+        onClose={onClose}
+        open={open}
+      >
         <FoodMenu />
       </Drawer>
     </>

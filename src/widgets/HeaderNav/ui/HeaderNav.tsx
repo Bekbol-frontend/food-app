@@ -4,10 +4,13 @@ import { SwitchTheme } from "@/shared/ui/SwitchTheme";
 import { Logo } from "@/shared/ui/Logo";
 import { DrawerMenu } from "@/widgets/DrawerMenu";
 import styles from "./HeaderNav.module.scss";
+import { useResponsive } from "@/shared/hooks/useResponsive";
 
 const { Header } = Layout;
 
 function HeaderNav() {
+  const { sm } = useResponsive();
+
   return (
     <Header className={styles.header}>
       <Flex flex={1} gap={10} justify="space-between" align="center">
@@ -16,7 +19,7 @@ function HeaderNav() {
         </Flex>
         <Flex gap={10} justify="space-between" align="center">
           <SwitchLang />
-          <SwitchTheme />
+          {sm && <SwitchTheme />}
           <DrawerMenu />
         </Flex>
       </Flex>
