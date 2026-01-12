@@ -2,6 +2,7 @@ import { type ReactNode } from "react";
 import { ConfigProvider, theme } from "antd";
 import { useAppContext } from "@/shared/lib/useAppContext";
 import type { THEME } from "../../AppContextProvider";
+import { useResponsive } from "@/shared/hooks/useResponsive";
 
 function getColor(appTheme: THEME, content: string) {
   return appTheme === "dark" ? `var(${content}-dark)` : `var(${content}-light)`;
@@ -13,6 +14,8 @@ interface IProps {
 
 function AppAntdConfigProvider({ children }: IProps) {
   const { theme: appTheme } = useAppContext();
+
+  const { sm } = useResponsive();
 
   return (
     <ConfigProvider
@@ -28,18 +31,24 @@ function AppAntdConfigProvider({ children }: IProps) {
         components: {
           Layout: {
             headerHeight: 90,
+            headerPadding: 0,
             headerBg: getColor(appTheme, "--content-bg"),
             siderBg: getColor(appTheme, "--content-bg"),
             bodyBg: getColor(appTheme, "--content-bg"),
           },
           Menu: {
-            itemBg: getColor(appTheme, "--content-bg"),
+            itemBg: sm
+              ? getColor(appTheme, "--content-bg")
+              : getColor(appTheme, "--menu-drawer"),
           },
           Button: {
             controlHeight: 37,
           },
           Input: {
             controlHeight: 37,
+          },
+          Drawer: {
+            colorBgElevated: getColor(appTheme, "--menu-drawer"),
           },
         },
       }}

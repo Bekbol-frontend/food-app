@@ -1,11 +1,7 @@
 import { Categories } from "@/entities/Categories";
 
 function CategoriesPage() {
-  return (
-    <>
-      <Categories />
-    </>
-  );
+  return <Categories />;
 }
 
 export default CategoriesPage;

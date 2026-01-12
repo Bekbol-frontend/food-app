@@ -30,5 +30,7 @@
   "Login": "Логин",
   "Please input your login!": "Пожалуйста, введите свой логин!",
   "Password": "Пароль",
-  "Please input your password!": "Пожалуйста, введите свой пароль!"
+  "Please input your password!": "Пожалуйста, введите свой пароль!",
+
+  "Food menu": "Меню еды"
 }

@@ -4,12 +4,13 @@ import { HeaderSection } from "@/shared/ui/HeaderSection";
 import { useCallback, useState } from "react";
 import CategoryModal from "./CreateCategory/CategoryModal/CategoryModal";
 import { useGetCategories } from "../model/hooks/useGetCategories";
+import { ContentError } from "@/shared/ui/ContentError";
 
 function Categories() {
   const [modal, setModal] = useState(false);
   const [id, setId] = useState<number | null>(null);
 
-  const { data, isLoading } = useGetCategories();
+  const { data, isLoading, isError, error } = useGetCategories();
 
   const onShowModal = useCallback(() => {
     setModal(true);
@@ -27,6 +28,10 @@ function Categories() {
     setId(id);
     setModal(true);
   }, []);
+
+  if (isError && error) {
+    return <ContentError title="Error" desc={error.message} />;
+  }
 
   return (
     <>

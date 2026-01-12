@@ -20,7 +20,7 @@ API.interceptors.request.use(
     config.headers["Accept-Language"] = i18n.language;
 
     if (accessToken) {
-      // config.headers["Authorization"] = `Bearer ${accessToken}`;
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
 
     return config;

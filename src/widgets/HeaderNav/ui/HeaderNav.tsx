@@ -1,8 +1,9 @@
 import { Flex, Layout } from "antd";
-import styles from "./HeaderNav.module.scss";
 import { SwitchLang } from "@/shared/ui/SwitchLang";
 import { SwitchTheme } from "@/shared/ui/SwitchTheme";
 import { Logo } from "@/shared/ui/Logo";
+import { DrawerMenu } from "@/widgets/DrawerMenu";
+import styles from "./HeaderNav.module.scss";
 
 const { Header } = Layout;
 
@@ -16,6 +17,7 @@ function HeaderNav() {
         <Flex gap={10} justify="space-between" align="center">
           <SwitchLang />
           <SwitchTheme />
+          <DrawerMenu />
         </Flex>
       </Flex>
     </Header>

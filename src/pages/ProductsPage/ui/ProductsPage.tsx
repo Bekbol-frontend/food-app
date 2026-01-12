@@ -1,9 +1,7 @@
-
+import { Products } from "@/entities/Products";
 
 function ProductsPage() {
-  return (
-    <div>ProductsPage</div>
-  )
+  return <Products />;
 }
 
-export default ProductsPage
+export default ProductsPage;

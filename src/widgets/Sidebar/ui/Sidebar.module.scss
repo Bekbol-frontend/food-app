@@ -1,6 +1,4 @@
 .sidebar {
-  padding: var(--space-l) var(--space-xs);
-
   overflow: auto;
   height: 100vh;
   position: sticky;
@@ -8,6 +6,9 @@
   top: 0;
   scrollbar-width: thin;
   scrollbar-gutter: "stable";
-
   border-right: 1px solid var(--color-border);
+
+  .menuWrapper {
+    padding: var(--space-s);
+  }
 }
