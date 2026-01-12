@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDeleteCategory } from "../../model/hooks/useDeleteCategory";
 import { useStyleTable } from "@/shared/ui/useStyleTable";
+import { tableColWidth } from "@/shared/constants/tableColWidth";
 
 interface IProps {
   data?: ICategory[];
@@ -47,7 +48,7 @@ function CategoryTable(props: IProps) {
         title: t("ID"),
         dataIndex: "id",
         key: "id",
-        width: 100,
+        width: tableColWidth.id,
         fixed: "start",
       },
       {
