@@ -11,7 +11,11 @@ import { Menu } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 
-function FoodMenu() {
+interface IProps {
+  onCloseDrawer?: () => void;
+}
+
+function FoodMenu({ onCloseDrawer }: IProps) {
   const { t } = useTranslation();
   const { pathname } = useLocation();
 
@@ -19,6 +23,11 @@ function FoodMenu() {
     <Menu
       mode="inline"
       selectedKeys={[pathname]}
+      onClick={() => {
+        if (onCloseDrawer) {
+          onCloseDrawer();
+        }
+      }}
       items={[
         {
           key: AppRoutePages.home,

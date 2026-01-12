@@ -27,10 +27,7 @@ const userSlice = createSlice({
         LOCAL_STORAGE_USER_KEY,
         JSON.stringify(payload.user)
       );
-      localStorage.setItem(
-        LOCAL_STORAGE_TOKEN_KEY,
-        JSON.stringify(payload.token)
-      );
+      localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, payload.token);
     },
   },
 });

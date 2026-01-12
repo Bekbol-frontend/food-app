@@ -16,7 +16,6 @@ API.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
 
-    config.headers = config.headers ?? {};
     config.headers["Accept-Language"] = i18n.language;
 
     if (accessToken) {

@@ -39,7 +39,7 @@ function DrawerMenu() {
         onClose={onClose}
         open={open}
       >
-        <FoodMenu />
+        <FoodMenu onCloseDrawer={onClose} />
       </Drawer>
     </>
   );
