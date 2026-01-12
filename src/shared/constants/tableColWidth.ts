@@ -1,3 +1,3 @@
 export const tableColWidth = {
-  id: 50,
+  id: 70,
 };
