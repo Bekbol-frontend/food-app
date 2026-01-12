@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./HeaderSection.module.scss";
 import { PlusOutlined } from "@ant-design/icons";
 import { clsx } from "@/shared/lib/clsx";
+import { useResponsive } from "@/shared/hooks/useResponsive";
 
 const { Title } = Typography;
 
@@ -16,6 +17,7 @@ function HeaderSection(props: IProps) {
   const { title, onShowModal, className = "" } = props;
 
   const { t } = useTranslation();
+  const { sm } = useResponsive();
 
   return (
     <Flex
@@ -24,7 +26,7 @@ function HeaderSection(props: IProps) {
       justify="space-between"
       className={clsx([className])}
     >
-      <Title level={3} className={styles.title}>
+      <Title level={sm ? 3 : 4} className={styles.title}>
         {t(title)}
       </Title>
       <Button

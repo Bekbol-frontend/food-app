@@ -29,7 +29,7 @@ function Categories() {
     setModal(true);
   }, []);
 
-  if (isError && error) {
+  if (isError) {
     return <ContentError title="Error" desc={error.message} />;
   }
 

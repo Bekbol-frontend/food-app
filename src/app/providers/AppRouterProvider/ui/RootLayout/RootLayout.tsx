@@ -5,6 +5,7 @@ import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 import styles from "./RootLayout.module.scss";
 import { useResponsive } from "@/shared/hooks/useResponsive";
+import { LoadingPage } from "@/shared/ui/LoadingPage";
 
 const { Content } = Layout;
 
@@ -17,7 +18,7 @@ function RootLayout() {
       <Layout>
         <HeaderNav />
         <Content className={styles.content}>
-          <Suspense>
+          <Suspense fallback={<LoadingPage />}>
             <Outlet />
           </Suspense>
         </Content>

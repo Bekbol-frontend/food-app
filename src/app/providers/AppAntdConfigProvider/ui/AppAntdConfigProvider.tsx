@@ -24,7 +24,7 @@ function AppAntdConfigProvider({ children }: IProps) {
           appTheme === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
 
         token: {
-          fontSize: 16,
+          fontSize: sm ? 16 : 15,
           fontFamily: "var(--font-nunito)",
           borderRadius: 4,
         },
@@ -45,6 +45,12 @@ function AppAntdConfigProvider({ children }: IProps) {
             controlHeight: 37,
           },
           Input: {
+            controlHeight: 37,
+          },
+          InputNumber: {
+            controlHeight: 37,
+          },
+          Select: {
             controlHeight: 37,
           },
           Drawer: {

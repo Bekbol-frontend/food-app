@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDeleteCategory } from "../../model/hooks/useDeleteCategory";
-import { useStyleTable } from "@/shared/ui/useStyleTable";
+import { useStyleTable } from "@/shared/hooks/useStyleTable";
 import { tableColWidth } from "@/shared/constants/tableColWidth";
 import { useTableScrollY } from "@/shared/lib/useTableScrollY";
 
@@ -102,10 +102,6 @@ function CategoryTable(props: IProps) {
     [t, confirm, id, isPending, onEdit]
   );
 
-  if (!data) return null;
-
-  const fakeData = [...data, ...data, ...data];
-
   return (
     <>
       {contextHolder}
@@ -114,7 +110,7 @@ function CategoryTable(props: IProps) {
           loading={loading}
           rowKey="id"
           columns={columns}
-          dataSource={fakeData}
+          dataSource={data}
           pagination={false}
           className={styles.customTable}
           scroll={{ x: "max-content", y }}
