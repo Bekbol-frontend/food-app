@@ -4,7 +4,7 @@ import { queryKeys } from "@/shared/lib/queryKeys";
 import { PlusOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Divider, Form, Select } from "antd";
-import { useCallback, useState } from "react";
+import { useCallback, useState, type MouseEventHandler } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function ProductCategoryId() {
@@ -12,12 +12,16 @@ export default function ProductCategoryId() {
   const [open, setOpen] = useState(false);
   const { t, i18n } = useTranslation();
 
-  const onShowModal = useCallback(() => {
+  const onShowModal: MouseEventHandler<HTMLElement> = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     setModal(true);
   }, []);
 
   const onHideModal = useCallback(() => {
     setModal(false);
+    setOpen(true);
   }, []);
 
   const handleOpenChange = useCallback(
