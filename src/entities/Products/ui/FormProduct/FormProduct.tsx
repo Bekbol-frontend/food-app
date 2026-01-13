@@ -6,6 +6,8 @@ import ProductNameTab from "./ProductNameTab/ProductNameTab";
 import ProductDescTab from "./ProductDescTab/ProductDescTab";
 import ProductPrice from "./ProductPrice/ProductPrice";
 import ProductCategoryId from "./ProductCategoryId/ProductCategoryId";
+import ProductAvailable from "./ProductAvailable/ProductAvailable";
+import ProductFormImage from "./ProductFormImage/ProductFormImage";
 
 function FormProduct() {
   const onFinish: FormProps<IProductForm>["onFinish"] = (values) => {
@@ -39,6 +41,12 @@ function FormProduct() {
         </Col>
         <Col span={12}>
           <ProductCategoryId />
+        </Col>
+        <Col span={12}>
+          <ProductFormImage />
+        </Col>
+        <Col span={12}>
+          <ProductAvailable />
         </Col>
       </Row>
 
