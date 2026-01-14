@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Card, Table, Tag, type TableProps } from "antd";
 import type { IProduct } from "../../model/types";
 import { formatDateTable } from "@/shared/lib/formatDateTable";
@@ -5,7 +6,6 @@ import { tableColWidth } from "@/shared/constants/tableColWidth";
 import { useStyleTable } from "@/shared/hooks/useStyleTable";
 import { useTableScrollY } from "@/shared/lib/useTableScrollY";
 import { useTranslation } from "react-i18next";
-import { useMemo } from "react";
 import { ImageTable } from "@/shared/ui/ImageTable";
 import { useGetProducts } from "../../model/hooks/useGetProducts";
 
@@ -95,10 +95,17 @@ function ProductsTable() {
         columns={columns}
         dataSource={data?.data.data}
         loading={isLoading}
-        pagination={false}
         className={styles.customTable}
         rowKey="id"
         scroll={{ x: "max-content", y }}
+        // pagination={{
+        //   current: 1,
+        //   pageSize: 3,
+        //   total: 150,
+        //   showSizeChanger: true,
+        //   pageSizeOptions: [5, 10, 20, 50, 100],
+        //   onChange: (page, pageSize) => console.log(page, pageSize),
+        // }}
       />
     </Card>
   );
