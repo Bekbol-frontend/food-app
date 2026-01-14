@@ -32,5 +32,23 @@
   "Password": "Parol",
   "Please input your password!": "Parolinizdi kirgiziń!",
 
-  "Food menu": "Awqat menyusi"
+  "Food menu": "Awqat menyusi",
+
+  "Category name": "Kategoriya atı",
+  "Product name": "Ónim atı",
+  "Product description": "Ónimniń sıpatlaması",
+  "Price": "Baha",
+  "Is available": "Satılıwda bar",
+  "Please enter a product name ": "Ónim atın kirgiziń: ",
+  "Please enter a product name!": "Ónim atın kirgiziń!",
+  "Please enter a product price!": "Ónim bahasın kirgiziń!",
+  "Please enter a category!": "Kategoriya kirgiziń!",
+  "Only images can be uploaded!": "Tek súwretlerdi júklew múmkin!",
+  "Image size must be less than 5MB!": "Súwret ólshemi 5MB tan kishi boliwi kerek!",
+  "Upload an image": "Súwretti júklew",
+  "Product image": "Ónimniń súwreti",
+  "Please enter a product image!": "Ónim súwretin kirgiziń!",
+  "Preview image": "Súwretti kóriw",
+  "Availability": "Paydalanıw",
+  "Available": "Satılıwda bar"
 }

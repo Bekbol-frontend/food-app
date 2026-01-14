@@ -5,6 +5,12 @@ export interface IData<T> {
   code: number;
 }
 
+export interface IErrorData<T> {
+  success: boolean;
+  message: string;
+  errors: T;
+}
+
 export interface IPropertyLang {
   uz: string;
   ru: string;

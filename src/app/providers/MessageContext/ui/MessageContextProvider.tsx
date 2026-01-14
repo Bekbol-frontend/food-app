@@ -1,4 +1,4 @@
-import { message } from "antd";
+import { message, notification } from "antd";
 import { MessageContext } from "../config";
 import type { ReactNode } from "react";
 
@@ -8,10 +8,13 @@ interface IProps {
 
 function MessageContextProvider({ children }: IProps) {
   const [messageApi, contextHolder] = message.useMessage();
+  const [contextApi, contextHolderNotification] =
+    notification.useNotification();
 
   return (
-    <MessageContext value={{ messageApi }}>
+    <MessageContext value={{ messageApi, contextApi }}>
       {contextHolder}
+      {contextHolderNotification}
       <>{children}</>
     </MessageContext>
   );

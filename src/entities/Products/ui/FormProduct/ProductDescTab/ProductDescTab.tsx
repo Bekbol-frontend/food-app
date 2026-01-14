@@ -16,14 +16,8 @@ function ProductDescTab() {
         style: { borderColor: "red" },
         children: (
           <Form.Item<IProductForm>
-            label="Description"
+            label={t("Product description")}
             name={["description", el.key]}
-            rules={[
-              {
-                required: true,
-                message: t("Please enter a category description!"),
-              },
-            ]}
           >
             <Input />
           </Form.Item>

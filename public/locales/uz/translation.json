@@ -32,5 +32,23 @@
   "Password": "Parol",
   "Please input your password!": "Iltimos, parolingizni kiriting!",
 
-  "Food menu": "Oziq-ovqat menyusi"
+  "Food menu": "Oziq-ovqat menyusi",
+
+  "Category name": "Kategoriya nomi",
+  "Product name": "Mahsulot nomi",
+  "Product description": "Mahsulot tavsifi",
+  "Price": "Narxi",
+  "Is available": "Mavjud",
+  "Please enter a product name ": "Mahsulot nomini kiriting: ",
+  "Please enter a product name!": "Iltimos, mahsulot nomini kiriting!",
+  "Please enter a product price!": "Iltimos, mahsulot narxini kiriting!",
+  "Please enter a category!": "Iltimos, toifani kiriting!",
+  "Only images can be uploaded!": "Faqat rasmlarni yuklash mumkin!",
+  "Image size must be less than 5MB!": "Rasm hajmi 5 MB dan kam bo'lishi kerak!",
+  "Upload an image": "Rasm yuklash",
+  "Product image": "Mahsulot tasviri",
+  "Please enter a product image!": "Iltimos, mahsulot rasmini kiriting!",
+  "Preview image": "Rasmni oldindan ko'rish",
+  "Availability": "Mavjudligi",
+  "Available": "Mavjud"
 }

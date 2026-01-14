@@ -1,15 +1,18 @@
+import { useState } from "react";
 import type { IProductForm } from "@/entities/Products/model/types";
-import { Form, Upload, message, Modal } from "antd";
+import { Form, Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import type { UploadFile, UploadProps } from "antd";
-import { useState } from "react";
+import { useMessageContext } from "@/shared/hooks/useMessageContext";
 
 function ProductFormImage() {
   const { t } = useTranslation();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
+
+  const { messageApi } = useMessageContext();
 
   const getBase64 = (file: File): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -20,16 +23,24 @@ function ProductFormImage() {
     });
 
   const beforeUpload = (file: File) => {
-    const isImage = file.type.startsWith("image/");
-    if (!isImage) {
-      message.error(t("Faqat rasm yuklash mumkin!"));
-      return false;
+    const allowedTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
+      "image/svg+xml",
+    ];
+    const isAllowedType = allowedTypes.includes(file.type);
+
+    if (!isAllowedType) {
+      messageApi.error(t("Only images can be uploaded!"));
+      return Upload.LIST_IGNORE;
     }
 
     const isLt5M = file.size / 1024 / 1024 < 5;
     if (!isLt5M) {
-      message.error(t("Rasm hajmi 5MB dan kichik bo'lishi kerak!"));
-      return false;
+      messageApi.error(t("Image size must be less than 5MB!"));
+      return Upload.LIST_IGNORE;
     }
 
     return false;
@@ -50,7 +61,7 @@ function ProductFormImage() {
   const uploadButton = (
     <button style={{ border: 0, background: "none" }} type="button">
       <PlusOutlined />
-      <div style={{ marginTop: 8 }}>{t("Rasm yuklash")}</div>
+      <div style={{ marginTop: 8 }}>{t("Upload an image")}</div>
     </button>
   );
 
@@ -58,11 +69,11 @@ function ProductFormImage() {
     <>
       <Form.Item<IProductForm>
         name="image"
-        label={t("Mahsulot rasmi")}
+        label={t("Product image")}
         rules={[
           {
             required: true,
-            message: t("Iltimos mahsulot rasmini yuklang!"),
+            message: t("Please enter a product image!"),
           },
         ]}
         valuePropName="fileList"
@@ -74,6 +85,7 @@ function ProductFormImage() {
         }}
       >
         <Upload
+          accept=".jpg,.jpeg,.png,.gif,.svg"
           listType="picture-card"
           fileList={fileList}
           onChange={handleChange}
@@ -87,7 +99,7 @@ function ProductFormImage() {
 
       <Modal
         open={previewOpen}
-        title={t("Rasmni ko'rish")}
+        title={t("Preview image")}
         footer={null}
         onCancel={() => setPreviewOpen(false)}
       >

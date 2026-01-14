@@ -1,15 +1,15 @@
 import type { ICategoryForm } from "@/entities/Categories/model/types";
-import type { TypeLangs } from "@/shared/types";
 import { ContentError } from "@/shared/ui/ContentError";
 import { ContentLoading } from "@/shared/ui/ContentLoading";
 import type { FormProps } from "antd";
-import { Button, Form, message, notification } from "antd";
+import { Button, Form } from "antd";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import CategoryFormTab from "./CategoryFormTab/CategoryFormTab";
 import { useCreateCategory } from "@/entities/Categories/model/hooks/useCreateCategory";
 import { useUpdateCategory } from "@/entities/Categories/model/hooks/useUpdateCategory";
 import { useGetCategoryById } from "@/entities/Categories/model/hooks/useGetCategoryById";
+import { useMessageContext } from "@/shared/hooks/useMessageContext";
 
 interface IProps {
   closeModal: () => void;
@@ -18,9 +18,7 @@ interface IProps {
 
 function CategoryForm({ closeModal, id }: IProps) {
   const { t } = useTranslation();
-  const [messageApi, contextHolder] = message.useMessage();
-  const [api, contextHolderNotification] = notification.useNotification();
-
+  const { messageApi, contextApi } = useMessageContext();
   const [form] = Form.useForm();
 
   const createMutation = useCreateCategory({ form, closeModal, messageApi });
@@ -51,21 +49,17 @@ function CategoryForm({ closeModal, id }: IProps) {
   const onFinishFailed: FormProps<ICategoryForm>["onFinishFailed"] = (
     errorInfo
   ) => {
-    const name = errorInfo.values.name;
+    console.log(errorInfo);
+    const errorInfoArrayName: (string | number | undefined)[] =
+      errorInfo.errorFields.map((el) => el.name[1]).slice(0, 3);
 
-    let emptyValues: Array<TypeLangs> = [];
-
-    for (let key in name) {
-      if (!name[key as TypeLangs]) {
-        emptyValues.push(key as TypeLangs);
-      }
+    if (errorInfoArrayName.some((el) => el !== undefined)) {
+      contextApi["warning"]({
+        description: `${t(
+          "Please enter a product name "
+        )} ${errorInfoArrayName.join(" ")}`,
+      });
     }
-
-    api["warning"]({
-      description: `${t("Please enter a category name!")} ${emptyValues.join(
-        ", "
-      )}`,
-    });
   };
 
   useEffect(() => {
@@ -87,29 +81,25 @@ function CategoryForm({ closeModal, id }: IProps) {
   }
 
   return (
-    <>
-      {contextHolder}
-      {contextHolderNotification}
-      <Form
-        form={form}
-        name={id ? "update-category-form" : "create-category-form"}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-        layout="vertical"
-      >
-        <CategoryFormTab />
+    <Form
+      form={form}
+      name={id ? "update-category-form" : "create-category-form"}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      autoComplete="off"
+      layout="vertical"
+    >
+      <CategoryFormTab />
 
-        <Button
-          type="primary"
-          htmlType="submit"
-          loading={isPending || isPendingUpdate}
-          danger={isError || isErrorUpdate}
-        >
-          {isError ? t("Error create") : id ? t("Update") : t("Create")}
-        </Button>
-      </Form>
-    </>
+      <Button
+        type="primary"
+        htmlType="submit"
+        loading={isPending || isPendingUpdate}
+        danger={isError || isErrorUpdate}
+      >
+        {isError ? t("Error create") : id ? t("Update") : t("Create")}
+      </Button>
+    </Form>
   );
 }
 

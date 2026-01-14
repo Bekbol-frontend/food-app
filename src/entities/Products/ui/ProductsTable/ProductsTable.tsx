@@ -4,6 +4,9 @@ import { formatDateTable } from "@/shared/lib/formatDateTable";
 import { tableColWidth } from "@/shared/constants/tableColWidth";
 import { useStyleTable } from "@/shared/hooks/useStyleTable";
 import { useTableScrollY } from "@/shared/lib/useTableScrollY";
+import { useTranslation } from "react-i18next";
+import { useMemo } from "react";
+import { ImageTable } from "@/shared/ui/ImageTable";
 
 interface IProps {
   data?: IProduct[];
@@ -14,61 +17,72 @@ function ProductsTable({ data, loading }: IProps) {
   const { styles } = useStyleTable();
   const y = useTableScrollY();
 
-  const columns: TableProps<IProduct>["columns"] = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-      width: tableColWidth.id,
-      fixed: "start",
-    },
-    {
-      title: "Category name",
-      dataIndex: "category_name",
-      key: "category_name",
-      width: tableColWidth.title,
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      width: tableColWidth.title,
-    },
-    {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
-      width: tableColWidth.desc,
-    },
-    {
-      title: "Price",
-      dataIndex: "price",
-      key: "price",
-      width: tableColWidth.price,
-    },
-    {
-      title: "Is available",
-      dataIndex: "is_available",
-      key: "is_available",
-      render: (is_available) => (
-        <Tag color={is_available ? "green" : "red"}>
-          {is_available ? "Yes" : "No"}
-        </Tag>
-      ),
-    },
-    {
-      title: "Created at",
-      dataIndex: "created_at",
-      key: "created_at",
-      render: (date) => formatDateTable(date),
-    },
-    {
-      title: "Updated at",
-      dataIndex: "updated_at",
-      key: "updated_at",
-      render: (date) => formatDateTable(date),
-    },
-  ];
+  const { t } = useTranslation();
+
+  const columns: TableProps<IProduct>["columns"] = useMemo(
+    () => [
+      {
+        title: t("ID"),
+        dataIndex: "id",
+        key: "id",
+        width: tableColWidth.id,
+        fixed: "start",
+      },
+      {
+        title: t("Image"),
+        dataIndex: "image",
+        key: "image",
+        render: (image) => <ImageTable imgUrl={image} alt="product-image" />,
+      },
+      {
+        title: t("Category name"),
+        dataIndex: "category_name",
+        key: "category_name",
+        width: tableColWidth.title,
+      },
+      {
+        title: t("Product name"),
+        dataIndex: "name",
+        key: "name",
+        width: tableColWidth.title,
+      },
+      {
+        title: t("Product description"),
+        dataIndex: "description",
+        key: "description",
+        width: tableColWidth.desc,
+      },
+      {
+        title: t("Price"),
+        dataIndex: "price",
+        key: "price",
+        width: tableColWidth.price,
+      },
+      {
+        title: t("Is available"),
+        dataIndex: "is_available",
+        key: "is_available",
+        render: (is_available) => (
+          <Tag color={is_available ? "green" : "red"}>
+            {is_available ? "Yes" : "No"}
+          </Tag>
+        ),
+      },
+      {
+        title: t("Created at"),
+        dataIndex: "created_at",
+        key: "created_at",
+        render: (date) => formatDateTable(date),
+      },
+      {
+        title: t("Updated at"),
+        dataIndex: "updated_at",
+        key: "updated_at",
+        render: (date) => formatDateTable(date),
+      },
+    ],
+    [t]
+  );
 
   return (
     <Card>

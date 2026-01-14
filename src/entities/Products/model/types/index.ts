@@ -1,4 +1,5 @@
 import type { IPropertyLang } from "@/shared/types";
+import type { UploadFile } from "antd";
 
 export interface IProduct {
   id: number;
@@ -17,7 +18,7 @@ export interface IProductForm {
   category_id: number;
   price: number;
   is_available?: boolean;
-  image: string;
+  image: UploadFile[];
 
   name: IPropertyLang;
   description?: IPropertyLang;

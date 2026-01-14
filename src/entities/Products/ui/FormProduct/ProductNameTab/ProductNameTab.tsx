@@ -16,12 +16,12 @@ function ProductNameTab() {
         style: { borderColor: "red" },
         children: (
           <Form.Item<IProductForm>
-            label={t("Name")}
+            label={t("Product name")}
             name={["name", el.key]}
             rules={[
               {
                 required: true,
-                message: t("Please enter a category name!"),
+                message: t("Please enter a product name!"),
               },
             ]}
           >

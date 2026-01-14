@@ -43,12 +43,12 @@ export default function ProductCategoryId() {
   return (
     <>
       <Form.Item<IProductForm>
-        label="Category"
+        label={t("Category name")}
         name="category_id"
         rules={[
           {
             required: true,
-            message: t("Please enter a category category!"),
+            message: t("Please enter a category!"),
           },
         ]}
       >

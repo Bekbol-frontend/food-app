@@ -9,7 +9,7 @@ function ProductAvailable() {
     <Form.Item<IProductForm>
       name="is_available"
       valuePropName="checked"
-      label={null}
+      label={t("Availability")}
     >
       <Checkbox>{t("Available")}</Checkbox>
     </Form.Item>

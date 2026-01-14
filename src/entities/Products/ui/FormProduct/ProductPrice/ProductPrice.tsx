@@ -7,12 +7,12 @@ function ProductPrice() {
 
   return (
     <Form.Item<IProductForm>
-      label="Price"
+      label={t("Price")}
       name="price"
       rules={[
         {
           required: true,
-          message: t("Please enter a category price!"),
+          message: t("Please enter a product price!"),
         },
       ]}
     >

@@ -32,5 +32,23 @@
   "Password": "Пароль",
   "Please input your password!": "Пожалуйста, введите свой пароль!",
 
-  "Food menu": "Меню еды"
+  "Food menu": "Меню еды",
+
+  "Category name": "Название категории",
+  "Product name": "Название продукта",
+  "Product description": "Описание продукта",
+  "Price": "Цена",
+  "Is available": "Доступен",
+  "Please enter a product name ": "Пожалуйста, введите название продукта: ",
+  "Please enter a product name!": "Пожалуйста, введите название товара!",
+  "Please enter a product price!": "Пожалуйста, введите цену товара!",
+  "Please enter a category!": "Пожалуйста, выберите категорию!",
+  "Only images can be uploaded!": "Загружать можно только изображения!",
+  "Image size must be less than 5MB!": "Размер изображения должен быть менее 5 МБ!",
+  "Upload an image": "Загрузите изображение",
+  "Product image": "Изображение продукта",
+  "Please enter a product image!": "Пожалуйста, добавьте изображение товара!",
+  "Preview image": "Предварительное изображение",
+  "Availability": "Доступность",
+  "Available": "Доступный"
 }
