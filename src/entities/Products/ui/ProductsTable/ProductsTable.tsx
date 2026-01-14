@@ -35,13 +35,17 @@ function ProductsTable() {
         title: t("Category name"),
         dataIndex: "category_name",
         key: "category_name",
+        align: "center",
         width: tableColWidth.title,
+        sorter: (a, b) => a.category_name.localeCompare(b.category_name),
       },
       {
         title: t("Product name"),
         dataIndex: "name",
         key: "name",
+        align: "center",
         width: tableColWidth.title,
+        sorter: (a, b) => a.name.localeCompare(b.name),
       },
       {
         title: t("Product description"),
@@ -54,11 +58,13 @@ function ProductsTable() {
         dataIndex: "price",
         key: "price",
         width: tableColWidth.price,
+        sorter: (a, b) => a.price - b.price,
       },
       {
         title: t("Is available"),
         dataIndex: "is_available",
         key: "is_available",
+        align: "center",
         render: (is_available) => (
           <Tag color={is_available ? "green" : "red"}>
             {is_available ? "Yes" : "No"}
@@ -69,12 +75,14 @@ function ProductsTable() {
         title: t("Created at"),
         dataIndex: "created_at",
         key: "created_at",
+        align: "center",
         render: (date) => formatDateTable(date),
       },
       {
         title: t("Updated at"),
         dataIndex: "updated_at",
         key: "updated_at",
+        align: "center",
         render: (date) => formatDateTable(date),
       },
     ],
