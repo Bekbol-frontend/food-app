@@ -7,16 +7,13 @@ import { useTableScrollY } from "@/shared/lib/useTableScrollY";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
 import { ImageTable } from "@/shared/ui/ImageTable";
+import { useGetProducts } from "../../model/hooks/useGetProducts";
 
-interface IProps {
-  data?: IProduct[];
-  loading: boolean;
-}
+function ProductsTable() {
+  const { data, isLoading } = useGetProducts();
 
-function ProductsTable({ data, loading }: IProps) {
   const { styles } = useStyleTable();
   const y = useTableScrollY();
-
   const { t } = useTranslation();
 
   const columns: TableProps<IProduct>["columns"] = useMemo(
@@ -88,8 +85,8 @@ function ProductsTable({ data, loading }: IProps) {
     <Card>
       <Table<IProduct>
         columns={columns}
-        dataSource={data}
-        loading={loading}
+        dataSource={data?.data.data}
+        loading={isLoading}
         pagination={false}
         className={styles.customTable}
         rowKey="id"
