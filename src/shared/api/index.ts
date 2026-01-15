@@ -3,8 +3,6 @@ import { BASE_URL } from "./baseUrl";
 import i18n from "../config/i18n";
 import { LOCAL_STORAGE_TOKEN_KEY } from "../constants";
 
-i18n.language;
-
 const API = axios.create({
   baseURL: BASE_URL,
   headers: {
