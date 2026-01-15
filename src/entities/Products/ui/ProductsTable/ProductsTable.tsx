@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Card, Table, Tag, type TableProps } from "antd";
+import { Card, Divider, Input, Table, Tag, type TableProps } from "antd";
 import type { IProduct } from "../../model/types";
 import { formatDateTable } from "@/shared/lib/formatDateTable";
 import { tableColWidth } from "@/shared/constants/tableColWidth";
@@ -8,13 +8,21 @@ import { useTableScrollY } from "@/shared/lib/useTableScrollY";
 import { useTranslation } from "react-i18next";
 import { ImageTable } from "@/shared/ui/ImageTable";
 import { useGetProducts } from "../../model/hooks/useGetProducts";
+import { SearchOutlined } from "@ant-design/icons";
+import { useSearchParams } from "react-router-dom";
+import { useDebounce } from "@/shared/hooks/useDebounce";
 
 function ProductsTable() {
-  const { data, isLoading } = useGetProducts();
-
   const { styles } = useStyleTable();
-  const y = useTableScrollY();
   const { t } = useTranslation();
+  const y = useTableScrollY();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get("search") || "";
+
+  const searchValue = useDebounce(search);
+
+  const { data, isLoading } = useGetProducts(searchValue);
 
   const columns: TableProps<IProduct>["columns"] = useMemo(
     () => [
@@ -91,6 +99,16 @@ function ProductsTable() {
 
   return (
     <Card>
+      <Input
+        placeholder="Search..."
+        suffix={<SearchOutlined />}
+        style={{
+          width: "220px",
+        }}
+        value={search}
+        onChange={(e) => setSearchParams({ search: e.target.value })}
+      />
+      <Divider />
       <Table<IProduct>
         columns={columns}
         dataSource={data?.data.data}
@@ -98,6 +116,7 @@ function ProductsTable() {
         className={styles.customTable}
         rowKey="id"
         scroll={{ x: "max-content", y }}
+        pagination={false}
         // pagination={{
         //   current: 1,
         //   pageSize: 3,
