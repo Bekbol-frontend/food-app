@@ -1,6 +1,6 @@
-import { Flex } from "antd";
-import styles from "./ImageTable.module.scss";
+import { Image } from "antd";
 import { clsx } from "@/shared/lib/clsx";
+import styles from "./ImageTable.module.scss";
 
 interface IProps {
   imgUrl: string;
@@ -10,13 +10,11 @@ interface IProps {
 
 function ImageTable({ imgUrl, className = "", alt }: IProps) {
   return (
-    <Flex
-      align="center"
-      justify="center"
-      className={clsx([styles.flex, className])}
-    >
-      <img src={imgUrl} alt={alt ?? "image"} />
-    </Flex>
+    <Image
+      className={clsx([styles.img, className])}
+      alt={alt ?? "image product"}
+      src={imgUrl}
+    />
   );
 }
 
