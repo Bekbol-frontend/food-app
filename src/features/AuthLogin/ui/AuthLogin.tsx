@@ -32,7 +32,7 @@ function AuthLogin() {
     if (error) {
       messageApi.error(`${t("Login error")} ${error}`);
     }
-  }, [error]);
+  }, [error, messageApi, t]);
 
   return (
     <Card className={styles.authWrapperCard}>

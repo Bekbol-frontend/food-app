@@ -22,7 +22,6 @@ function AppContextProvider({ children }: IProps) {
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_THEME_KEY, theme);
-
     document.body.className = theme;
   }, [theme]);
 
