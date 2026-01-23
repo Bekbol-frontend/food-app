@@ -3,7 +3,7 @@ import type { ICategory } from "../../model/types";
 import { Button, Card, Popconfirm, Space, Table, message } from "antd";
 import type { TableProps } from "antd";
 import { useTranslation } from "react-i18next";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDeleteCategory } from "../../model/hooks/useDeleteCategory";
 import { useStyleTable } from "@/shared/hooks/useStyleTable";
@@ -25,23 +25,15 @@ function CategoryTable(props: IProps) {
   const { t } = useTranslation();
   const y = useTableScrollY();
 
-  const deleteMutate = useDeleteCategory(messageApi);
-  const { mutate, isPending, isSuccess } = deleteMutate;
-
-  useEffect(() => {
-    if (isSuccess) setId(null);
-
-    return () => {
-      setId(null);
-    };
-  }, [isSuccess]);
+  const deleteMutate = useDeleteCategory(messageApi, setId);
+  const { mutate, isPending } = deleteMutate;
 
   const confirm = useCallback(
     (id: number) => {
       mutate(id);
       setId(id);
     },
-    [mutate]
+    [mutate],
   );
 
   const columns: TableProps<ICategory>["columns"] = useMemo(
@@ -99,7 +91,7 @@ function CategoryTable(props: IProps) {
         ),
       },
     ],
-    [t, confirm, id, isPending, onEdit]
+    [t, confirm, id, isPending, onEdit],
   );
 
   return (

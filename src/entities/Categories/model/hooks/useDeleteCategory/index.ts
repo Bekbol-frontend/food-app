@@ -3,8 +3,12 @@ import { deleteMutation } from "../../services";
 import { queryKeys } from "@/shared/lib/queryKeys";
 import { useTranslation } from "react-i18next";
 import type { MessageInstance } from "antd/es/message/interface";
+import type { Dispatch, SetStateAction } from "react";
 
-export const useDeleteCategory = (messageApi: MessageInstance) => {
+export const useDeleteCategory = (
+  messageApi: MessageInstance,
+  setId: Dispatch<SetStateAction<number | null>>,
+) => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
 
@@ -17,6 +21,7 @@ export const useDeleteCategory = (messageApi: MessageInstance) => {
         content: t("Category deleted successfully!"),
         duration: 2.5,
       });
+      setId(null);
     },
     onError: (error) => {
       messageApi.open({

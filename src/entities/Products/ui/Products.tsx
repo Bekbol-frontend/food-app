@@ -6,6 +6,12 @@ import { useCallback, useState } from "react";
 
 function Products() {
   const [modal, setModal] = useState(false);
+  const [id, setId] = useState<number | null>(null);
+
+  const onEdit = useCallback((id: number) => {
+    setId(id);
+    setModal(true);
+  }, []);
 
   const onShowModal = useCallback(() => {
     setModal(true);
@@ -13,14 +19,18 @@ function Products() {
 
   const onHideModal = useCallback(() => {
     setModal(false);
-  }, []);
+
+    if (id) {
+      setId(null);
+    }
+  }, [id]);
 
   return (
     <>
       <HeaderSection title="Products" onShowModal={onShowModal} />
 
       <ContentBlock>
-        <ProductsTable />
+        <ProductsTable onEdit={onEdit} />
       </ContentBlock>
 
       <ModalProduct modal={modal} handleCancel={onHideModal} />

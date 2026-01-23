@@ -1,5 +1,15 @@
-import { useMemo } from "react";
-import { Card, Divider, Input, Table, Tag, type TableProps } from "antd";
+import { useCallback, useMemo, useState } from "react";
+import {
+  Button,
+  Card,
+  Divider,
+  Input,
+  Popconfirm,
+  Space,
+  Table,
+  Tag,
+  type TableProps,
+} from "antd";
 import type { IProduct } from "../../model/types";
 import { formatDateTable } from "@/shared/lib/formatDateTable";
 import { tableColWidth } from "@/shared/constants/tableColWidth";
@@ -8,21 +18,43 @@ import { useTableScrollY } from "@/shared/lib/useTableScrollY";
 import { useTranslation } from "react-i18next";
 import { ImageTable } from "@/shared/ui/ImageTable";
 import { useGetProducts } from "../../model/hooks/useGetProducts";
-import { SearchOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "@/shared/hooks/useDebounce";
+import { useDeleteProduct } from "../../model/hooks/useDeleteProduct";
 
-function ProductsTable() {
+interface IProps {
+  onEdit: (id: number) => void;
+}
+
+function ProductsTable(props: IProps) {
+  const { onEdit } = props;
+
   const { styles } = useStyleTable();
   const { t } = useTranslation();
   const y = useTableScrollY();
 
+  const [id, setId] = useState<null | number>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get("search") || "";
 
   const searchValue = useDebounce(search);
 
   const { data, isLoading } = useGetProducts(searchValue);
+
+  const { mutate, isPending } = useDeleteProduct(setId);
+
+  const confirm = useCallback(
+    (id: number) => {
+      mutate(id);
+      setId(id);
+    },
+    [mutate],
+  );
 
   const columns: TableProps<IProduct>["columns"] = useMemo(
     () => [
@@ -93,8 +125,36 @@ function ProductsTable() {
         align: "center",
         render: (date) => formatDateTable(date),
       },
+      {
+        title: t("Action"),
+        key: "action",
+        render: (_, record) => (
+          <Space size="small">
+            <Popconfirm
+              title={t("Delete category task?")}
+              description={t("Are you sure to delete this category task?")}
+              onConfirm={() => confirm(record.id)}
+              okText={t("Yes")}
+              cancelText={t("No")}
+            >
+              <Button
+                type="primary"
+                danger
+                icon={<DeleteOutlined />}
+                loading={id === record.id && isPending}
+              />
+            </Popconfirm>
+
+            <Button
+              type="primary"
+              icon={<EditOutlined />}
+              onClick={() => onEdit(record.id)}
+            />
+          </Space>
+        ),
+      },
     ],
-    [t]
+    [t, confirm, id, isPending, onEdit],
   );
 
   return (
