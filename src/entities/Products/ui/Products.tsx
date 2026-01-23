@@ -33,7 +33,7 @@ function Products() {
         <ProductsTable onEdit={onEdit} />
       </ContentBlock>
 
-      <ModalProduct modal={modal} handleCancel={onHideModal} />
+      <ModalProduct modal={modal} handleCancel={onHideModal} id={id} />
     </>
   );
 }

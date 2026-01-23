@@ -13,12 +13,17 @@ import { useTranslation } from "react-i18next";
 import { useCreateProduct } from "../../model/hooks/useCreateProduct";
 import type { TypeLangs } from "@/shared/types";
 import { useResponsive } from "@/shared/hooks/useResponsive";
+import { useGetGetProductById } from "../../model/hooks/useGetGetProductById";
+import { ContentLoading } from "@/shared/ui/ContentLoading";
+import { ContentError } from "@/shared/ui/ContentError";
+// import { useEffect } from "react";
 
 interface IProps {
   closeModal: () => void;
+  id: number | null;
 }
 
-function FormProduct({ closeModal }: IProps) {
+function FormProduct({ closeModal, id }: IProps) {
   const { contextApi } = useMessageContext();
   const { t } = useTranslation();
   const [form] = Form.useForm();
@@ -27,6 +32,25 @@ function FormProduct({ closeModal }: IProps) {
 
   const createMutation = useCreateProduct({ form, closeModal });
   const { mutate: createMutate, isPending, isError } = createMutation;
+
+  const {
+    data: productData,
+    isLoading,
+    isError: isGetError,
+    error: getError,
+  } = useGetGetProductById(id);
+
+  console.log(productData);
+
+  // useEffect(() => {
+  //   if (productData?.data.data) {
+  //     form.setFieldsValue(productData.data.data);
+  //   }
+
+  //   return () => {
+  //     form.resetFields();
+  //   };
+  // }, [productData, form]);
 
   const onFinish: FormProps<IProductForm>["onFinish"] = (values) => {
     const formData = new FormData();
@@ -77,6 +101,14 @@ function FormProduct({ closeModal }: IProps) {
       });
     }
   };
+
+  if (isLoading) {
+    return <ContentLoading />;
+  }
+
+  if (isGetError && getError) {
+    return <ContentError title="Error get category" desc={getError.message} />;
+  }
 
   return (
     <Form
