@@ -12,6 +12,7 @@ import { useMessageContext } from "@/shared/hooks/useMessageContext";
 import { useTranslation } from "react-i18next";
 import { useCreateProduct } from "../../model/hooks/useCreateProduct";
 import type { TypeLangs } from "@/shared/types";
+import { useResponsive } from "@/shared/hooks/useResponsive";
 
 interface IProps {
   closeModal: () => void;
@@ -21,6 +22,8 @@ function FormProduct({ closeModal }: IProps) {
   const { contextApi } = useMessageContext();
   const { t } = useTranslation();
   const [form] = Form.useForm();
+
+  const { sm } = useResponsive();
 
   const createMutation = useCreateProduct({ form, closeModal });
   const { mutate: createMutate, isPending, isError } = createMutation;
@@ -43,7 +46,7 @@ function FormProduct({ closeModal }: IProps) {
       Object.keys(values.description).forEach((lang) => {
         formData.append(
           `description[${lang}]`,
-          values.description![lang as TypeLangs]
+          values.description![lang as TypeLangs],
         );
       });
     }
@@ -61,7 +64,7 @@ function FormProduct({ closeModal }: IProps) {
   };
 
   const onFinishFailed: FormProps<IProductForm>["onFinishFailed"] = (
-    errorInfo
+    errorInfo,
   ) => {
     const errorInfoArrayName: (string | number | undefined)[] =
       errorInfo.errorFields.map((el) => el.name[1]).slice(0, 3);
@@ -69,7 +72,7 @@ function FormProduct({ closeModal }: IProps) {
     if (errorInfoArrayName.some((el) => el !== undefined)) {
       contextApi["warning"]({
         description: `${t(
-          "Please enter a product name "
+          "Please enter a product name ",
         )} ${errorInfoArrayName.join(" ")}`,
       });
     }
@@ -86,16 +89,18 @@ function FormProduct({ closeModal }: IProps) {
       layout="vertical"
     >
       <Row gutter={[space.lg, space.xs]}>
-        <Col span={12}>
+        <Col span={sm ? 12 : 24}>
           <ProductNameTab />
         </Col>
-        <Col span={12}>
+
+        <Col span={sm ? 12 : 24}>
           <ProductDescTab />
         </Col>
-        <Col span={12}>
+
+        <Col span={sm ? 12 : 24}>
           <ProductPrice />
         </Col>
-        <Col span={12}>
+        <Col span={sm ? 12 : 24}>
           <ProductCategoryId />
         </Col>
         <Col span={12}>
